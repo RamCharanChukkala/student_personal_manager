@@ -1,0 +1,116 @@
+{% extends "panel.html" %}
+{% block addcss %}
+    <title>Add Notes</title>
+    <style>
+        /* body {
+            background-color: #e0f7fa;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #34495e;
+        } */
+        .container {
+    width: 90%;
+    max-width: 600px; /* Added max-width for better responsiveness */
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #16a085;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+    color: #34495e;
+}
+
+/* Styles for the title input */
+.titleinput {
+    width: 100%;
+    padding: 12px; 
+    margin-bottom: 15px; 
+    border: 2px solid #34495e;
+    border-radius: 5px;
+    font-size: 14px; 
+    box-sizing: border-box; 
+}
+
+.titleinput:focus {
+    border-color: #16a085; 
+    outline: none;
+}
+
+/* Styles for the content textarea */
+.contentinput {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #34495e;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: vertical; 
+    min-height: 150px;
+}
+
+.contentinput:focus {
+    border-color: #16a085;
+    outline: none;
+}
+
+/* Button styling */
+button {
+    background-color: #16a085;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease; 
+}
+
+button:hover {
+    background-color: #15a378;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 95%; 
+        padding: 15px;
+    }
+    .titleinput,
+    .contentinput {
+        font-size: 14px; 
+    }
+}
+
+    </style>
+{% endblock %}
+
+{% block content %}
+<body>
+    <div class="container">
+        <h2>Add New Notes</h2>
+        <form  method="post">
+    
+            <label for="title">Title:</label>
+            <input class="titleinput" type="text" id="title" name="title" placeholder="Enter note title" required>
+            
+            <label for="content">Content:</label>
+            <textarea class="contentinput" id="content" name="content" placeholder="Enter note content" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+{% endblock %}

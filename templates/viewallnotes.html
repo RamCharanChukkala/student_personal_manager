@@ -1,0 +1,34 @@
+{% extends "panel.html" %}
+{% block addcss %}
+    <title>View All Notes</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='viewallnotes.css')}}">
+{% endblock %}
+{% block content %}
+
+<body>
+    <div class="container">
+    <h1>View All Notes</h1>
+    <table>
+    <tr>
+        <th>Notes i'd</th>
+        <th>Notes Title</th>
+        <th>Created_at</th>
+        <th>link</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        {% for i in allnotes %}
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{i[2]}}</td>
+        <td> <a href="{{url_for('view_note',nid=i[0])}}">view</a> </td>
+        <td> <a href="{{url_for('updatenotes',nid=i[0])}}">update</a> </td>
+        <td> <a href="{{url_for('deletenotes',nid=i[0])}}">delete</a>  </td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+    {% endblock%}
+</body>
+</html> 

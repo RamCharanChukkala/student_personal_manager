@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Keep only one `addcss` block -->
+    {% block addcss %}{% endblock %}
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .navbar-left,
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .nav-item:hover {
+            background-color: #34495e;
+            border-radius: 4px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .dropbtn {
+            background-color: #2c3e50;
+            color: white;
+            padding: 14px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #34495e;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .profile {
+            margin-right: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .search-bar input {
+            padding: 8px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 8px 12px;
+            margin-left: 5px;
+            border: none;
+            background-color: #e74c3c;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .search-bar button:hover {
+            background-color: #c0392b;
+        }
+        .fa-solid {
+            color: white;
+        }
+        abbr{
+            text-decoration: none;
+        }
+        
+
+    </style>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <center style="color: blue;">{{ message }}</center>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <abbr href="{{url_for('panel')}}" title="STUDENT PERSONAL MANAGER" class="nav-item">SPM</abbr>
+            <div class="dropdown">
+                <button class="dropbtn">Notes</button>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('addnotes') }}">Add Notes</a>
+                    <a href="{{url_for('viewallnotes')}}">View notes</a>
+                    <a href="{{url_for('getexceldata')}}">Show Excel</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">File</button>
+                <div class="dropdown-content">
+                    <a href="{{url_for('addfile')}}">Add File</a>
+                    <a href="{{url_for('viewall_files')}}">View all File</a>
+                </div>
+            </div>
+            <a href="{{ url_for('logout') }}" class="nav-item">Logout</a>
+        </div>
+        <div class="navbar-right">
+            <abbr title="{{ session.get('username') }}" style="color: white;">{{ session.get('username') }}</abbr> &nbsp;
+            <i class="fa-solid fa-user"></i>
+            <!-- <a href="#" class="profile nav-item">Profile</a> -->
+             <form action="{{url_for('search')}}" method="post">
+            <div class="search-bar">
+                <input type="text" name="sname" placeholder="Search...">
+                <button>Search</button>
+            </div>
+        </form>
+        </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+</body>
+{% if sdata %}
+
+<table>
+    <tr>
+        <th>Notes i'd</th>
+        <th>Notes Title</th>
+        <th>Created_at</th>
+        <th>link</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        {% for i in sdata %}
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{i[2]}}</td>
+        <td> <a href="{{url_for('view_note',nid=i[0])}}">view</a> </td>
+        <td> <a href="{{url_for('updatenotes',nid=i[0])}}">update</a> </td>
+        <td> <a href="{{url_for('deletenotes',nid=i[0])}}">delete</a>  </td>
+    </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+
+</html>

@@ -1,0 +1,31 @@
+{% extends 'panel.html' %}
+{% block addcss %}
+    <title>View All Notes</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='view.css')}}">
+{% endblock %}
+{% block content %}
+<body>
+   <center> <h1>View All Notes</h1></center>
+    <table>
+        <thead>
+            <tr>
+                <th>File ID</th>
+                <th>File name</th>
+                <th>Created At</th>
+                <th>link</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr>
+            {% for i in fdata %}
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td><a href="{{url_for('viewfiles',fid=i[0])}}">view</a></td>
+            <td><a href="{{url_for('downloadfiles',fid=i[0])}}">Download</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+{% endblock %}

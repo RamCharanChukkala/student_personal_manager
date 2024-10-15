@@ -1,0 +1,72 @@
+{% extends "panel.html" %}
+{% block addcss %}
+    <title>Add Notes</title>
+    <style>
+        /* body {
+            background-color: #e0f7fa;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #34495e;
+        } */
+        .container {
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-right: 4%;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #16a085;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Styling for file input */
+.fileinput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #34495e;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Styling for submit button */
+.submitinput {
+    background-color: #16a085;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submitinput:hover {
+    background-color: #15a378;
+}
+
+    </style>
+{% endblock %}
+
+{% block content %}
+<body>
+    <form method="post" enctype="multipart/form-data">
+    <div class="container">
+            <label for="file">Choose a file:</label>
+            <input class="fileinput" type="file" id="file" name="file" required>
+            <input class="submitinput" type="submit" value="Upload File">
+    </div>
+</form>
+</body>
+{% endblock %}

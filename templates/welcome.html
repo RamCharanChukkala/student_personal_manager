@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>welcome</title>
+</head>
+
+<style>
+    body{
+        text-align: center;
+        /* background-image: url('https://static.vecteezy.com/system/resources/previews/029/985/891/non_2x/student-concentrating-on-homework-ai-generated-photo.jpeg'); */
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: bisque;
+    }
+    .parent{
+        border: 2px solid rgba(10, 10, 10, 0.619);
+        margin: 10% 20%;
+        padding: 2%;
+        background-color: rgba(165, 42, 42, 0.627);
+    }
+    button{
+        padding: 1%;
+        margin: 1%;
+        width: 25%;
+        border: rgba(0, 0, 0, 0.605) solid;
+        border-radius: 25px;
+        color: brown;
+    }
+    
+</style>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <center style="color: blue;">{{ message }}</center>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+<body>
+
+        <div class="parent">
+            <h1>Welcome To SPM</h1>
+            <h3> Student Personal Record Manager </h3>
+            <p>
+                <a href="{{url_for('register')}}"><button type="submit" class="btn btn-primary">Register</button></a>
+                <a href="{{url_for('login')}}"><button type="submit" class="btn btn-wearning">login</button></a>
+            </p>
+        </div>
+</body>
+</html>
